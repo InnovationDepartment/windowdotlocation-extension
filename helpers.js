@@ -1,11 +1,15 @@
 function logVisit() {
   fetchUserName().then(function(name) {
+    window.secretusername = name;
     socket.emit('visit', {username: name, url: window.location.href});
   });
 }
 
 function visitsObserved() {
   socket.on('new-visit', function(visit) {
+    if (visit.username == window.secretusername) {
+      return false;
+    }
     visits.push(visit);
     updateView(visit);
     console.log(visits);
