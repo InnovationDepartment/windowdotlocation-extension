@@ -7,12 +7,9 @@ $(document).ready(function() {
 	}
 
   window.socket = io('http://104.131.251.160:3000');
-  // window.socket = io('localhost:3000');
 
-  // window.socket = io();
+  // Send a visit when connected to socket
   socket.on('connect', function() {
-   console.log('connect');
-
    logVisit();
   });
 });
