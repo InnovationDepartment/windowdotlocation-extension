@@ -7,6 +7,7 @@ function logVisit() {
 function visitsObserved() {
   socket.on('new-visit', function(visit) {
     visits.push(visit);
+    updateView(visit);
     console.log(visits);
   }); // visit -> { usersname, url }
 }
