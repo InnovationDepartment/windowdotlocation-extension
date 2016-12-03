@@ -13,6 +13,10 @@ $(document).ready(function() {
   socket.on('connect', function() {
    logVisit();
   });
+  
+  socket.on('party-nav', function(url) {
+    window.location.href = url;
+  });
 
   visitsObserved();
 
