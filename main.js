@@ -12,4 +12,6 @@ $(document).ready(function() {
   socket.on('connect', function() {
    logVisit();
   });
+
+  appendView();
 });
