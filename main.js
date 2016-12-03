@@ -1,4 +1,5 @@
 var server_location = 'https://windowdotlocationserver.amazonaws.com';
+var visits = Array();
 
 $(document).ready(function() {
   // Is the user setting their username?
@@ -13,5 +14,6 @@ $(document).ready(function() {
    logVisit();
   });
 
+  visitsObserved();
   appendView();
 });

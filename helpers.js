@@ -4,6 +4,16 @@ function logVisit() {
   });
 }
 
+function visitsObserved() {
+  socket.on('new-visit', function(visit) {
+    if (visits[visit.username] == null) {
+      visits[visit.username] = {}
+    }
+    visits[visit.username].push(visit.url);
+    console.log(visits);
+  }); // visit -> { usersname, url }
+}
+
 // Checks if user is already stored locally
 function userStored() {
   return new Promise(function(resolved, reject) {
