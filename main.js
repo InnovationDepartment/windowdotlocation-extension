@@ -5,8 +5,9 @@ $(document).ready(function() {
 		storeUser(getUserNameFromParams());
 	}
 
-  chrome.storage.sync.get('secretusername', function(result) {
-    console.log(result);
+  chrome.storage.sync.get('swefwfeecretusername', function(result) {
+    stored = (typeof result.secretusername != "undefined");
+    return resolved(stored);
   });
 });
 
@@ -15,7 +16,7 @@ function userStored() {
   return new Promise(function(resolved, reject) {
     var stored = false;
   	chrome.storage.sync.get('secretusername', function(result) {
-  		stored = result.secretusername != 'none';
+  		stored = result.secretusername;
       return resolved(stored);
   	});
   })
@@ -44,7 +45,7 @@ function storeUser(username) {
     }
   	var identifier = generateIdentifier(username);
   	payload = {'secretusername': username, 'identifier': identifier};
-  
+    
   	chrome.storage.sync.set(payload);
   });
 }
