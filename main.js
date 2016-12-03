@@ -1,7 +1,6 @@
 var server_location = 'https://windowdotlocationserver.amazonaws.com';
 
 $(document).ready(function() {
-  debugger;
 	if (getUserNameFromParams()) {
 		storeUser(getUserNameFromParams());
 	}
@@ -9,10 +8,11 @@ $(document).ready(function() {
 
 // Checks if user is already stored locally
 function userStored() {
-	chrome.storage.sync.get('secretusername', function(result){
-		console.log(result);
-		return result != 'none';
+  var stored = false;
+	chrome.storage.sync.get('secretusername', function(result) {
+		stored = result.secretusername != 'none';
 	});
+  return stored;
 }
 
 // Finds the username in the URL parameters and returns it
@@ -35,18 +35,17 @@ function storeUser(username) {
 	if (userStored()) {
 		return;
 	}
-	debugger;
+  if (username == 'none') {
+    return;
+  }
 	var identifier = generateIdentifier(username);
-	
-	chrome.storage.sync.set({'secretusername': username, 'identifier': identifier});
-	console.log('username stored');
+	payload = {'secretusername': username, 'identifier': identifier};
+  
+	chrome.storage.sync.set(payload);
 }
 
 function generateIdentifier(username) {
-  var buf = new Uint32Array(4);
   var seed;
-
-  window.crypto.getRandomValues(buf);
   
   $.getJSON('//jsonip.com/', function(data) {
     seed = data.ip.replace(/\./g, '');
@@ -58,8 +57,6 @@ function generateIdentifier(username) {
   	ascii = username.charCodeAt(i);
   	numericname = numericname + ascii.toString();
   }
-  console.log(numericname);
 
 	return parseInt(numericname) << seed;
 }
-
