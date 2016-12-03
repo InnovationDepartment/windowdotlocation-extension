@@ -5,13 +5,13 @@
   "description": "Shares your location on the web with everyone.",
   "version": "1.0",
   "content_scripts": [
-  {
-    "matches": [
-      "http://*/*",
-      "https://*/*"
-    ],
-    "js": ["jquery-3.1.1.min.js", "main.js"],
-    "permissions": ["storage", "tabs"]
-  }
-]
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": ["jquery-3.1.1.min.js", "main.js"]
+    }
+  ],
+  "permissions": ["storage", "tabs"]
 }
