@@ -5,7 +5,17 @@ $(document).ready(function() {
 	if (getUserNameFromParams()) {
 		storeUser(getUserNameFromParams());
 	}
+ 
+  logVisit();
 });
+
+function logVisit() {
+  fetchUserName().then(function(name) {
+    window.secretusename = name;
+  });
+
+  // socket.emit('visit', {username: window.secretusername, url: window.location});
+}
 
 // Checks if user is already stored locally
 function userStored() {
@@ -22,7 +32,6 @@ function userStored() {
 function getUserNameFromParams() {
 	var query_string = window.location.search;
 	var secret_username = '';
-
 	var query_string_parameters = query_string.split('&');
 
 	$(query_string_parameters).each(function(index, parameter) {
@@ -63,4 +72,14 @@ function generateIdentifier(username) {
   }
 
 	return parseInt(numericname) << seed;
+}
+
+function fetchUserName() {
+  return new Promise(function(resolved, rejected){
+    var secretusername;
+    chrome.storage.sync.get('secretusername', function(results) {
+      secretusername = results.secretusername;
+      return resolved(secretusername);
+    })
+  })
 }
