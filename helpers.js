@@ -6,10 +6,7 @@ function logVisit() {
 
 function visitsObserved() {
   socket.on('new-visit', function(visit) {
-    if (!visits[visit.username]) {
-      visits[visit.username] = {}
-    }
-    visits[visit.username].push(visit.url);
+    visits.push(visit);
     console.log(visits);
   }); // visit -> { usersname, url }
 }
