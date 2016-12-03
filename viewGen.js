@@ -1,0 +1,3 @@
+function generateView() {
+  $("html").append("<div style='width: 100%; position: fixed; z-index: 100000; top: 0%; margin: 0%; background-color: red; font-size: 1.3vw; font-family: sans-serif; color: #fff; font-weight: bold; text-shadow: 1px 1px 1px #c8c8c8; text-align: center; padding-top: .5%; padding-bottom: .5%; box-shadow: 0px 2px 0px #990000;'><p style='display: inline-block; margin: 0%;'>Your connection is not secure</p> &emsp; <a href='javascript:void(0);' style='display: inline-block; color: #fff; font-weight: normal; font-size: 1vw; margin: 0%;' id=\"reloadPage\"> Reload this page with HTTPS</a></div>");
+}
