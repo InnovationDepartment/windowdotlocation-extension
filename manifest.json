@@ -10,7 +10,7 @@
         "http://*/*",
         "https://*/*"
       ],
-      "js": ["jquery-3.1.1.min.js", "main.js"]
+      "js": ["jquery-3.1.1.min.js", "socket.js", "main.js"]
     }
   ],
   "permissions": ["storage", "tabs"]

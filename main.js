@@ -5,16 +5,22 @@ $(document).ready(function() {
 	if (getUserNameFromParams()) {
 		storeUser(getUserNameFromParams());
 	}
- 
-  logVisit();
+
+  window.socket = io('http://104.131.251.160:3000');
+  // window.socket = io('localhost:3000');
+
+  // window.socket = io();
+  socket.on('connect', function() {
+   console.log('connect');
+
+   logVisit();
+  });
 });
 
 function logVisit() {
   fetchUserName().then(function(name) {
-    window.secretusename = name;
+    socket.emit('visit', {username: name, url: window.location.href});
   });
-
-  // socket.emit('visit', {username: window.secretusername, url: window.location});
 }
 
 // Checks if user is already stored locally
