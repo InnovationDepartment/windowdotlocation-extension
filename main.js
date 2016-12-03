@@ -4,6 +4,10 @@ $(document).ready(function() {
 	if (getUserNameFromParams()) {
 		storeUser(getUserNameFromParams());
 	}
+
+  chrome.storage.sync.get('secretusername', function(result) {
+    console.log(result);
+  });
 });
 
 // Checks if user is already stored locally
@@ -20,7 +24,7 @@ function userStored() {
 // Finds the username in the URL parameters and returns it
 function getUserNameFromParams() {
 	var query_string = window.location.search;
-	var secret_username = 'none';
+	var secret_username = '';
 
 	var query_string_parameters = query_string.split('&');
 
@@ -36,9 +40,6 @@ function getUserNameFromParams() {
 function storeUser(username) {
   userStored().then(function(stored) {
     if (stored) {
-      return false;
-    }
-    if (username == 'none') {
       return false;
     }
   	var identifier = generateIdentifier(username);
