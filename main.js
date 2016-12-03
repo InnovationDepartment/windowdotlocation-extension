@@ -4,11 +4,6 @@ $(document).ready(function() {
 	if (getUserNameFromParams()) {
 		storeUser(getUserNameFromParams());
 	}
-
-  chrome.storage.sync.get('swefwfeecretusername', function(result) {
-    stored = (typeof result.secretusername != "undefined");
-    return resolved(stored);
-  });
 });
 
 // Checks if user is already stored locally
@@ -16,7 +11,7 @@ function userStored() {
   return new Promise(function(resolved, reject) {
     var stored = false;
   	chrome.storage.sync.get('secretusername', function(result) {
-  		stored = result.secretusername;
+  		stored = (typeof result.secretusername != "undefined");
       return resolved(stored);
   	});
   })
