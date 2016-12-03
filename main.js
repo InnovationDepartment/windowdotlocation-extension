@@ -1,6 +1,7 @@
 var server_location = 'https://windowdotlocationserver.amazonaws.com';
 
 $(document).ready(function() {
+  // Is the user setting their username?
 	if (getUserNameFromParams()) {
 		storeUser(getUserNameFromParams());
 	}
@@ -33,6 +34,7 @@ function getUserNameFromParams() {
 	return secret_username;
 }
 
+// Generates an identifier and stores the user
 function storeUser(username) {
   userStored().then(function(stored) {
     if (stored) {
@@ -45,6 +47,7 @@ function storeUser(username) {
   });
 }
 
+// Uses the User IP to generate a unique identifier
 function generateIdentifier(username) {
   var seed;
   
